@@ -16,7 +16,7 @@ container config. The following environment variables are required:
 |----------------------|-------------|
 | SPRINGCM_CLIENT_ID | The client ID used to access SpringCM (DocuSign CLM) via the REST API. |
 | SPRINGCM_CLIENT_SECRET | The client secret used to access SpringCM (DocuSign CLM) via the REST API. |
-| FILE_LOG_PATH | The path of the CSV file where previously delivered files are recorded (by their DocumentsOfRecordId value). See the Delivery Log section for more details. |
+| SIMPLEDB_DOMAIN | The SimpleDB domain used to check for previous deliveries and record new ones. |
 
 ## CLM Delivery & Attributes
 
@@ -83,6 +83,16 @@ prerequisites:
 3. AWS IAM credentials (see credentials section below)
 4. Rake
 
+### The gist
+
+1. Install Ruby and Docker
+2. Install IAM credentials for this project. See [documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+   for more info. Credentials are available in [Smartsheet](https://app.smartsheet.com/sheets/Hgrj4VHJ7jgp352wRgPxwv3C9HHpCwpqxW6GcgP1?view=grid).
+3. Make code changes
+4. Build container image (`rake build`)
+5. Push container image (`rake push`)
+6. Update task definition (might not be required if `latest` tag is used)
+
 ### Credentials
 
 To push Docker images and modify ECS task definitions, you'll need an IAM
@@ -119,3 +129,27 @@ the appropriate image tag. You can create a new task definition revision from
 the AWS ECS web console. The task definition can also use the `latest` tag so
 that it always gets the most recent code version, assuming the `latest` tag
 was applied to the most recently pushed image.
+
+## AWS
+
+The infrastructure supporting this process is detailed below. The CaaS AWS
+ECS cluster is used to execute task definitions for this process on a
+schedule defined in AWS CloudWatch Events. The containerized code scans
+Oracle HCM, and compares against an AWS SimpleDB domain to determine which
+files have not yet been transferred to the target environment.
+
+![AWS Infrastructure for Oracle HCM CLM Sync](images/aws.png)
+
+### AWS ECS (Elastic Container Service)
+
+* Cluster: CaaS
+* Task definition: JID01171_oracle_hcm_clm_sync_(uat|prod)
+* Scheduled event rule: JID01171_oracle_hcm_clm_sync_(uat|prod)
+
+### AWS ECR (Elastic Container Registry)
+
+* Repository: cid00022/jid01171/onepoint_hcm_clm_sync
+
+### AWS SimpleDB
+
+* Domain: oracle_hcm_clm_sync_(uat|prod)
