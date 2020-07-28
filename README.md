@@ -94,9 +94,10 @@ prerequisites:
 2. Install IAM credentials for this project. See [documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
    for more info. Credentials are available in [Smartsheet](https://app.smartsheet.com/sheets/Hgrj4VHJ7jgp352wRgPxwv3C9HHpCwpqxW6GcgP1?view=grid).
 3. Make code changes
-4. Build container image (`rake build`)
-5. Push container image (`rake push`)
-6. Update task definition (might not be required if `latest` tag is used)
+4. Login with Docker to the ECR repository (`rake login`)
+5. Build container image (`rake build`)
+6. Push container image (`rake push`)
+7. Update task definition (might not be required if `latest` tag is used)
 
 ### Credentials
 
@@ -125,7 +126,6 @@ The `build` task accepts three arguments: the image name, tag, and a boolean
 value indicating whether latest should be applied, although this is only
 considered if the tag argument is not `latest`—which is the default tag
 argument value. For more information on using arguments in Rake tasks, see [here](https://ruby.github.io/rake/doc/rakefile_rdoc.html#label-Tasks+with+Arguments).
-
 
 ### Deploy
 
