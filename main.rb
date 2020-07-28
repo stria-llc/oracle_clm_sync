@@ -1,5 +1,3 @@
-require 'springcm-sdk'
-require 'oracle_hcm'
-require 'aws-sdk-dynamodb'
+require './task.rb'
 
-puts 'oracle_hcm_clm_sync'
+Task.new.do
