@@ -78,14 +78,19 @@ delivered. The structure of a delivery record is as follows:
 To work on and/or deploy a new version of this task, you need the following
 prerequisites:
 
-1. Ruby
-2. Docker
-3. AWS IAM credentials (see credentials section below)
-4. Rake
+1. Ruby (Rake and Bundler required)
+2. AWS CLI
+3. Docker
+4. AWS IAM credentials (see credentials section below)
 
 ### The gist
 
-1. Install Ruby and Docker
+1. Install [Docker](https://www.docker.com/get-started) and the [AWS CLI](https://aws.amazon.com/cli/)
+2. Install [Ruby](https://www.ruby-lang.org/en/downloads/) 2.6, and required development gems:
+   ```
+   $ gem install bundler --version '~> 2.1'
+   $ gem install rake --version '~> 13.0'
+   ```
 2. Install IAM credentials for this project. See [documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
    for more info. Credentials are available in [Smartsheet](https://app.smartsheet.com/sheets/Hgrj4VHJ7jgp352wRgPxwv3C9HHpCwpqxW6GcgP1?view=grid).
 3. Make code changes
