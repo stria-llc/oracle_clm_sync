@@ -2,7 +2,7 @@ task :default => ['build']
 
 desc 'Build the task image'
 task :build, [:image, :tag, :auto_latest] do |task, args|
-  args.with_defaults(image: 'cid00022/jid01171/onepoint_hcm_clm_sync', tag: 'latest', auto_latest: true)
+  args.with_defaults(image: 'cid00022/jid01171/oracle_hcm_clm_sync', tag: 'latest', auto_latest: true)
   tags = ["#{args.image}:#{args.tag}"]
   if args.tag != 'latest' && args.auto_latest
     tags << "#{args.image}:latest"
@@ -25,7 +25,7 @@ desc 'Push image to AWS ECR repository'
 task :push, [:repository_url, :image, :tag] do |task, args|
   args.with_defaults(
     repository_url: '681585688392.dkr.ecr.us-east-1.amazonaws.com',
-    image: 'cid00022/jid01171/onepoint_hcm_clm_sync',
+    image: 'cid00022/jid01171/oracle_hcm_clm_sync',
     tag: 'latest'
   )
   image_src = "#{args.image}:#{args.tag}"

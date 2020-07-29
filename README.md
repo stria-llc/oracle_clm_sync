@@ -173,12 +173,15 @@ files have not yet been transferred to the target environment.
 ### AWS ECS (Elastic Container Service)
 
 * Cluster: [CaaS](https://console.aws.amazon.com/ecs/home?region=us-east-1#/clusters/CaaS/services)
-* Task definition: JID01171_oracle_hcm_clm_sync_(uat|prod)
-* Scheduled event rule: JID01171_oracle_hcm_clm_sync_(uat|prod)
+* Task definitions:
+  1. OracleHcmClmSyncUAT
+  2. OracleHcmClmSyncProduction
+* Scheduled event rules:
+  1. OracleHcmClmSync
 
 ### AWS ECR (Elastic Container Registry)
 
-* Repository: [cid00022/jid01171/onepoint_hcm_clm_sync](https://console.aws.amazon.com/ecr/repositories/cid00022/jid01171/onepoint_hcm_clm_sync/?region=us-east-1)
+* Repository: [cid00022/jid01171/oracle_hcm_clm_sync](https://console.aws.amazon.com/ecr/repositories/cid00022/jid01171/oracle_hcm_clm_sync/?region=us-east-1)
 
 ### AWS CloudWatch Events
 
