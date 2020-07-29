@@ -11,7 +11,7 @@ class Task
   end
 
   def do
-
+    puts 'oracle_hcm_clm_sync'
   end
 
   private
