@@ -6,6 +6,22 @@ This script connects to an Oracle HCM account and downloads any document
 records for all employees and transfers them to a DocuSign CLM folder and
 applies attributes.
 
+## Definitions
+
+* __Ruby__  - Dynamically typed, hackable, reflective, and categorically
+  awesome programming language.
+* __rvm (Ruby Version Manager)__ - A tool for managing multiple Ruby installations.
+* __AWS (Amazon Web Services)__  - Amazon's SaaS platform that provides
+  pay-for-what-you-use service for compute, storage, networking, and much
+  more. See below for description on individual AWS services used in this
+  application.
+* __Containerization__ - A lightweight form of virtual computing wherein
+  software is executed in a container engine instead of a guest OS.
+* __Docker__ - A platform for building, managing, and executing containers.
+* __Image/Containers__ - An image is a prebuilt software unit that includes
+  code, system and runtime libraries, dependencies, and configuration. When
+  executed in a container engine (e.g. Docker), an image becomes a container.
+
 ## Configuration
 
 This task is designed to be executed in AWS ECS, and as such is configured
@@ -118,8 +134,8 @@ with the AWS CLI.
 ### Code
 
 This application was developed with Ruby 2.6.0, but the newer versions should
-work fine, assuming the two main dependencies (oracle_hcm and springcm-sdk
-are supported on that version as well.)
+work fine, as long as dependencies are compatible as well. The built images
+use this exact Ruby version, so if you have rvm, use 2.6.0 for development.
 
 ### Build
 
@@ -156,13 +172,13 @@ files have not yet been transferred to the target environment.
 
 ### AWS ECS (Elastic Container Service)
 
-* Cluster: CaaS
+* Cluster: [CaaS](https://console.aws.amazon.com/ecs/home?region=us-east-1#/clusters/CaaS/services)
 * Task definition: JID01171_oracle_hcm_clm_sync_(uat|prod)
 * Scheduled event rule: JID01171_oracle_hcm_clm_sync_(uat|prod)
 
 ### AWS ECR (Elastic Container Registry)
 
-* Repository: cid00022/jid01171/onepoint_hcm_clm_sync
+* Repository: [cid00022/jid01171/onepoint_hcm_clm_sync](https://console.aws.amazon.com/ecr/repositories/cid00022/jid01171/onepoint_hcm_clm_sync/?region=us-east-1)
 
 ### AWS SimpleDB
 
@@ -170,24 +186,24 @@ files have not yet been transferred to the target environment.
 
 ### AWS Lambda
 
-* Function: OracleHcmClmSyncSdbDump
+* Function: [OracleHcmClmSyncSdbDump](https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions/OracleHcmClmSyncSdbDump?tab=configuration)
 
 ### AWS S3
 
-* Bucket: caas.aws.stria.com
+* Bucket: [caas.aws.stria.com](https://s3.console.aws.amazon.com/s3/buckets/caas.aws.stria.com/?region=us-east-1&tab=overview)
 * Prefixes:
-  1. CID00022/JID01171/OracleHcmClmSyncSdbDump/Production
-  2. CID00022/JID01171/OracleHcmClmSyncSdbDump/UAT
+  1. [CID00022/JID01171/OracleHcmClmSyncSdbDump/Production](https://s3.console.aws.amazon.com/s3/buckets/caas.aws.stria.com/CID00022/JID01171/OracleHcmClmSyncSdbDump/Production/?region=us-east-1&tab=overview)
+  2. [CID00022/JID01171/OracleHcmClmSyncSdbDump/UAT](https://s3.console.aws.amazon.com/s3/buckets/caas.aws.stria.com/CID00022/JID01171/OracleHcmClmSyncSdbDump/UAT/?region=us-east-1&tab=overview)
 
 ### AWS IAM
 
-* User: OracleHcmClmSyncUser
+* User: [OracleHcmClmSyncUser](https://console.aws.amazon.com/iam/home?region=us-east-1#/users/OracleHcmClmSyncUser)
   * Directly assigned policies that allow pushing images to the ECR
     repository and reads/writes on the SimpleDB domain.
-* User: OracleHcmClmSyncZohoUser
+* User: [OracleHcmClmSyncZohoUser](https://console.aws.amazon.com/iam/home?region=us-east-1#/users/OracleHcmClmSyncZohoUser)
   * Directly assigned as policy that provides read-only access to the CSVs
     that contain delivery log records in S3.
-* Role: OracleHcmClmSyncLambdaRole
+* Role: [OracleHcmClmSyncLambdaRole](https://console.aws.amazon.com/iam/home?region=us-east-1#/roles/OracleHcmClmSyncLambdaRole)
   * Directly assigned policies that allow reads/writes on the SimpleDB
     domain, CloudWatch Logs access (creating log groups and putting events),
     and S3 access (for uploading generated CSVs).
