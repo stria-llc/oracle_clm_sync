@@ -30,6 +30,7 @@ container config. The following environment variables are required:
 
 | Environment Variable | Description |
 |----------------------|-------------|
+| SPRINGCM_DATACENTER | The data center of the target SpringCM (DocuSign CLM) account, e.g. uatna11 |
 | SPRINGCM_CLIENT_ID | The client ID used to access SpringCM (DocuSign CLM) via the REST API. |
 | SPRINGCM_CLIENT_SECRET | The client secret used to access SpringCM (DocuSign CLM) via the REST API. |
 | SIMPLEDB_DOMAIN | The SimpleDB domain used to check for previous deliveries and record new ones. |
@@ -174,8 +175,8 @@ files have not yet been transferred to the target environment.
 
 * Cluster: [CaaS](https://console.aws.amazon.com/ecs/home?region=us-east-1#/clusters/CaaS/services)
 * Task definitions:
-  1. OracleHcmClmSyncUAT
-  2. OracleHcmClmSyncProduction
+  1. [OracleHcmClmSyncUAT](https://console.aws.amazon.com/ecs/home?region=us-east-1#/taskDefinitions/OracleHcmClmSyncUAT/status/ACTIVE)
+  2. [OracleHcmClmSyncProduction](https://console.aws.amazon.com/ecs/home?region=us-east-1#/taskDefinitions/OracleHcmClmSyncProduction/status/ACTIVE)
 * Scheduled events: See [AWS CloudWatch Events section below](#cwe)
 
 ### AWS ECR (Elastic Container Registry)
@@ -185,16 +186,24 @@ files have not yet been transferred to the target environment.
 <h3 id="cwe">AWS CloudWatch Events</h3>
 
 * Scheduled Events:
-  1. OracleHcmClmSyncUAT
-  2. OracleHcmClmSyncProduction
+  1. [OracleHcmClmSyncUAT](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#rules:name=OracleHcmClmSyncUAT;accountId=681585688392)
+  2. [OracleHcmClmSyncProduction](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#rules:name=OracleHcmClmSyncProduction)
 
 ### AWS CloudWatch Logs
 
 * Log group: [/caas](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logsV2:log-groups/log-group/$252Fcaas)
+* Log streams:
+  1. [JID01171/UAT/OracleHcmClmSync/\*](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logsV2:log-groups/log-group/$252Fcaas$3FlogStreamNameFilter$3DJID01171$252FUAT$252FOracleHcmClmSync)
+  2. [JID01171/Production/OracleHcmClmSync/\*](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logsV2:log-groups/log-group/$252Fcaas$3FlogStreamNameFilter$3DJID01171$252FProduction$252FOracleHcmClmSync)
+* Dashboards:
+  1. [OracleHcmClmSyncUAT](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=OracleHcmClmSyncUAT;accountId=681585688392)
+  2. [OracleHcmClmSyncProduction](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=OracleHcmClmSyncProduction;accountId=681585688392)
 
 ### AWS SimpleDB
 
-* Domain: oracle_hcm_clm_sync_(uat|prod)
+* Domains:
+  1. oracle_hcm_clm_sync_uat
+  2. oracle_hcm_clm_sync_production
 
 ### AWS Lambda
 
