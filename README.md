@@ -12,7 +12,7 @@ applies attributes.
   awesome programming language.
 * __rvm (Ruby Version Manager)__ - A tool for managing multiple Ruby installations.
 * __AWS (Amazon Web Services)__  - Amazon's SaaS platform that provides
-  pay-for-what-you-use service for compute, storage, networking, and much
+  pay-for-what-you-use services for compute, storage, networking, and much
   more. See below for description on individual AWS services used in this
   application.
 * __Containerization__ - A lightweight form of virtual computing wherein
