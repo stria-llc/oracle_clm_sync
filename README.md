@@ -18,7 +18,7 @@ applies attributes.
 * __Containerization__ - A lightweight form of virtual computing wherein
   software is executed in a container engine instead of a guest OS.
 * __Docker__ - A platform for building, managing, and executing containers.
-* __Image/Containers__ - An image is a prebuilt software unit that includes
+* __Image/Container__ - An image is a prebuilt software unit that includes
   code, system and runtime libraries, dependencies, and configuration. When
   executed in a container engine (e.g. Docker), an image becomes a container.
 
