@@ -73,6 +73,15 @@ delivered. The structure of a delivery record is as follows:
 }
 ```
 
+## Reporting
+
+Zoho Analytics is the go-to platform for business intelligence and reporting
+for Stria, but there is no native support for using AWS SimpleDB to import
+data. To get data about delivered files into Zoho, an AWS Lambda function is
+used that generates a CSV file from all data in the provided SimpleDB domain
+and uploads it to an AWS S3 bucket. From here, Zoho is able to download the
+data on an interval using provided IAM credentials.
+
 ## Development & Deployment
 
 To work on and/or deploy a new version of this task, you need the following
@@ -158,3 +167,27 @@ files have not yet been transferred to the target environment.
 ### AWS SimpleDB
 
 * Domain: oracle_hcm_clm_sync_(uat|prod)
+
+### AWS Lambda
+
+* Function: OracleHcmClmSyncSdbDump
+
+### AWS S3
+
+* Bucket: caas.aws.stria.com
+* Prefixes:
+  1. CID00022/JID01171/OracleHcmClmSyncSdbDump/Production
+  2. CID00022/JID01171/OracleHcmClmSyncSdbDump/UAT
+
+### AWS IAM
+
+* User: OracleHcmClmSyncUser
+  * Directly assigned policies that allow pushing images to the ECR
+    repository and reads/writes on the SimpelDB domain.
+* User: OracleHcmClmSyncZohoUser
+  * Directly assigned as policy that provides read-only access to the CSVs
+    that contain delivery log records in S3.
+* Role: OracleHcmClmSyncLambdaRole
+  * Directly assigned policies that allow reads/writes on the SimpleDB
+    domain, CloudWatch Logs access (creating log groups and putting events),
+    and S3 access (for uploading generated CSVs).
