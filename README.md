@@ -183,7 +183,7 @@ files have not yet been transferred to the target environment.
 
 * User: OracleHcmClmSyncUser
   * Directly assigned policies that allow pushing images to the ECR
-    repository and reads/writes on the SimpelDB domain.
+    repository and reads/writes on the SimpleDB domain.
 * User: OracleHcmClmSyncZohoUser
   * Directly assigned as policy that provides read-only access to the CSVs
     that contain delivery log records in S3.
