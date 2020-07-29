@@ -180,6 +180,10 @@ files have not yet been transferred to the target environment.
 
 * Repository: [cid00022/jid01171/onepoint_hcm_clm_sync](https://console.aws.amazon.com/ecr/repositories/cid00022/jid01171/onepoint_hcm_clm_sync/?region=us-east-1)
 
+### AWS CloudWatch Logs
+
+* Log group: [/caas](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logsV2:log-groups/log-group/$252Fcaas)
+
 ### AWS SimpleDB
 
 * Domain: oracle_hcm_clm_sync_(uat|prod)
