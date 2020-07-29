@@ -176,16 +176,17 @@ files have not yet been transferred to the target environment.
 * Task definitions:
   1. OracleHcmClmSyncUAT
   2. OracleHcmClmSyncProduction
-* Scheduled event rules:
-  1. OracleHcmClmSync
+* Scheduled events: See [AWS CloudWatch Events section below](#cwe)
 
 ### AWS ECR (Elastic Container Registry)
 
 * Repository: [cid00022/jid01171/oracle_hcm_clm_sync](https://console.aws.amazon.com/ecr/repositories/cid00022/jid01171/oracle_hcm_clm_sync/?region=us-east-1)
 
-### AWS CloudWatch Events
+<h3 id="cwe">AWS CloudWatch Events</h3>
 
-* Event name: TBD
+* Scheduled Events:
+  1. OracleHcmClmSyncUAT
+  2. OracleHcmClmSyncProduction
 
 ### AWS CloudWatch Logs
 
