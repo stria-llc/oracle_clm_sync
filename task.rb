@@ -26,7 +26,7 @@ SpringCM Config:
   Data Center: #{springcm_config['datacenter']}
   Client ID: #{springcm_config['client_id']}
 AWS Config:
-  SimpleDB Delivery Log Domain: #{aws_config['simpledb']}
+  SimpleDB Delivery Log Domain: #{aws_config['simpledb_domain']}
   IAM Access Key ID: #{aws_config['access_key_id']}
     INFO
   end
