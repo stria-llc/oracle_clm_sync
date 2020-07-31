@@ -5,7 +5,7 @@ require './delivery_log_db.rb'
 class Task
   VERSION = '0.1.0'.freeze
 
-  attr_reader :springcm_client
+  attr_reader :springcm_client, :delivery_log_db
 
   def initialize
     @springcm_client = create_springcm_client
@@ -14,6 +14,7 @@ class Task
 
   def do
     info
+    delivery_log_db.load_history
   end
 
   private
