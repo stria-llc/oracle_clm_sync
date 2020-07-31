@@ -9,6 +9,7 @@ class Task
 
   def initialize
     @springcm_client = create_springcm_client
+    @hcm_client = create_hcm_client
     @delivery_log_db = DeliveryLogDb.new(aws_config)
   end
 
@@ -23,6 +24,9 @@ class Task
   def info
     puts <<-INFO
 Oracle HCM CLM Sync v#{VERSION}
+Oracle HCM Config:
+  Username: #{hcm_config['username']}
+  Endpoint: #{hcm_config['endpoint']}
 SpringCM Config:
   Data Center: #{springcm_config['datacenter']}
   Client ID: #{springcm_config['client_id']}
@@ -42,6 +46,24 @@ AWS Config:
     )
     client.connect!
     return client
+  end
+
+  def create_hcm_client
+    puts 'Configuring HCM client'
+    config = hcm_config
+    OracleHcm::Client.new(
+      config['endpoint'],
+      config['username'],
+      config['password']
+    )
+  end
+
+  def hcm_config
+    {
+      'username' => ENV['ORACLE_HCM_USERNAME'],
+      'password' => ENV['ORACLE_HCM_PASSWORD'],
+      'endpoint' => ENV['ORACLE_HCM_ENDPOINT']
+    }
   end
 
   def springcm_config

@@ -30,6 +30,9 @@ container config. The following environment variables are supported:
 
 | Environment Variable | Description |
 |----------------------|-------------|
+| ORACLE_HCM_USERNAME | The Oracle HCM account username |
+| ORACLE_HCM_PASSWORD | The password for the Oracle HCM user account |
+| ORACLE_HCM_ENDPOINT | The API endpoint assigned for the Oracle HCM account |
 | SPRINGCM_DATACENTER | The data center of the target SpringCM (DocuSign CLM) account, e.g. uatna11 |
 | SPRINGCM_CLIENT_ID | The client ID used to access SpringCM (DocuSign CLM) via the REST API. |
 | SPRINGCM_CLIENT_SECRET | The client secret used to access SpringCM (DocuSign CLM) via the REST API. |
