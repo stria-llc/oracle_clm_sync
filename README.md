@@ -26,7 +26,7 @@ applies attributes.
 
 This task is designed to be executed in AWS ECS, and as such is configured
 with environment variables that can be defined in the task definition's
-container config. The following environment variables are required:
+container config. The following environment variables are supported:
 
 | Environment Variable | Description |
 |----------------------|-------------|
@@ -34,6 +34,8 @@ container config. The following environment variables are required:
 | SPRINGCM_CLIENT_ID | The client ID used to access SpringCM (DocuSign CLM) via the REST API. |
 | SPRINGCM_CLIENT_SECRET | The client secret used to access SpringCM (DocuSign CLM) via the REST API. |
 | SIMPLEDB_DOMAIN | The SimpleDB domain used to check for previous deliveries and record new ones. |
+| IAM_ACCESS_KEY_ID | Optional. Access key ID for an IAM user to access SimpleDB as. Supported for development purposes only, as the ECS task definition is assigned an execution role that has attached policies that grant access. |
+| IAM_SECRET_ACCESS_KEY | Optional. Secret access key for an IAM user to access_key_id SimpleDB as. Like IAM_ACCESS_KEY_ID, this is intended for use in development only. |
 
 ## CLM Delivery & Attributes
 

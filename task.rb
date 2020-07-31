@@ -27,6 +27,7 @@ SpringCM Config:
   Client ID: #{springcm_config['client_id']}
 AWS Config:
   SimpleDB Delivery Log Domain: #{aws_config['simpledb']}
+  IAM Access Key ID: #{aws_config['access_key_id']}
     INFO
   end
 
@@ -51,7 +52,9 @@ AWS Config:
 
   def aws_config
     {
-      'simpledb' => ENV['SIMPLEDB_DOMAIN']
+      'simpledb' => ENV['SIMPLEDB_DOMAIN'],
+      'access_key_id' => ENV['IAM_ACCESS_KEY_ID'],
+      'secret_access_key' => ENV['IAM_SECRET_ACCESS_KEY']
     }
   end
 end
