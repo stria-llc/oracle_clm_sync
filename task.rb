@@ -9,7 +9,7 @@ class Task
 
   def initialize
     @springcm_client = create_springcm_client
-    @delivery_log_db = DeliveryLogDb.new
+    @delivery_log_db = DeliveryLogDb.new(aws_config)
   end
 
   def do
@@ -52,7 +52,7 @@ AWS Config:
 
   def aws_config
     {
-      'simpledb' => ENV['SIMPLEDB_DOMAIN'],
+      'simpledb_domain' => ENV['SIMPLEDB_DOMAIN'],
       'access_key_id' => ENV['IAM_ACCESS_KEY_ID'],
       'secret_access_key' => ENV['IAM_SECRET_ACCESS_KEY']
     }
