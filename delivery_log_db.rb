@@ -38,8 +38,8 @@ class DeliveryLogDb
 
       results.items.each { |item|
         upload_history[item.name] = {
-          delivery_date: get_attribute(item, 'delivery_date'),
-          clm_document_uid: get_attribute(item, 'clm_document_uid')
+          'delivery_date' => get_attribute(item, 'delivery_date'),
+          'clm_document_uid' => get_attribute(item, 'clm_document_uid')
         }
       }
 
@@ -47,8 +47,31 @@ class DeliveryLogDb
     end
   end
 
+  def log_delivery(record, document)
+    puts "Recording delivery of #{record.document_record_id} to SimpleDB..."
+    sdb.put_attributes({
+      domain_name: domain_name,
+      item_name: record.document_record_id.to_s,
+      attributes: [
+        {
+          name: 'delivery_date',
+          value: Time.now.iso8601
+        },
+        {
+          name: 'clm_document_uid',
+          value: document.uid
+        }
+      ]
+    })
+    puts 'Done'
+  end
+
   def uploaded?(document_record_id)
-    upload_history.include?(document_record_id)
+    upload_history.include?(document_record_id.to_s)
+  end
+
+  def delivery_date(document_record_id)
+    upload_history[document_record_id.to_s]['delivery_date']
   end
 
   private
