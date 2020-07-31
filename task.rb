@@ -52,6 +52,7 @@ AWS Config:
 
   def aws_config
     {
+      'region' => ENV['SIMPLEDB_REGION'],
       'simpledb_domain' => ENV['SIMPLEDB_DOMAIN'],
       'access_key_id' => ENV['IAM_ACCESS_KEY_ID'],
       'secret_access_key' => ENV['IAM_SECRET_ACCESS_KEY']

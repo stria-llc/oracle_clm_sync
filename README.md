@@ -33,6 +33,7 @@ container config. The following environment variables are supported:
 | SPRINGCM_DATACENTER | The data center of the target SpringCM (DocuSign CLM) account, e.g. uatna11 |
 | SPRINGCM_CLIENT_ID | The client ID used to access SpringCM (DocuSign CLM) via the REST API. |
 | SPRINGCM_CLIENT_SECRET | The client secret used to access SpringCM (DocuSign CLM) via the REST API. |
+| SIMPLEDB_REGION | AWS region to use for SimpleDB |
 | SIMPLEDB_DOMAIN | The SimpleDB domain used to check for previous deliveries and record new ones. |
 | IAM_ACCESS_KEY_ID | Optional. Access key ID for an IAM user to access SimpleDB as. Supported for development purposes only, as the ECS task definition is assigned an execution role that has attached policies that grant access. |
 | IAM_SECRET_ACCESS_KEY | Optional. Secret access key for an IAM user to access_key_id SimpleDB as. Like IAM_ACCESS_KEY_ID, this is intended for use in development only. |

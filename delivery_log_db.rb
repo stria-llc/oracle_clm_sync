@@ -5,6 +5,7 @@ class DeliveryLogDb
 
   def initialize(config)
     @sdb = Aws::SimpleDB::Client.new(
+      region: config['region'],
       access_key_id: config['access_key_id'],
       secret_access_key: config['secret_access_key']
     )
