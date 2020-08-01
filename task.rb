@@ -8,13 +8,13 @@ class Task
   attr_reader :springcm_client, :hcm_client, :delivery_log_db, :clm_upload_paths
 
   def initialize
+    info
     @springcm_client = create_springcm_client
     @hcm_client = create_hcm_client
     @delivery_log_db = DeliveryLogDb.new(aws_config)
   end
 
   def do
-    info
     delivery_log_db.load_history
     transfer_document_records
   end
