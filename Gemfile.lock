@@ -14,11 +14,12 @@ GEM
     aws-sigv2 (1.0.1)
     aws-sigv4 (1.2.1)
       aws-eventstream (~> 1, >= 1.0.2)
+    dotenv (2.7.6)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
     jmespath (1.4.0)
     multipart-post (2.1.1)
-    oracle_hcm (0.1.1)
+    oracle_hcm (0.2.0)
       faraday (~> 1.0)
     springcm-sdk (1.3.0)
       faraday (~> 1.0)
@@ -28,7 +29,8 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk-simpledb (~> 1.21)
-  oracle_hcm (~> 0.1)
+  dotenv
+  oracle_hcm (~> 0.2)
   springcm-sdk (~> 1.3)
 
 BUNDLED WITH
