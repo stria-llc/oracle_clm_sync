@@ -67,15 +67,14 @@ This project currently only targets entities that fall under #4, specifically:
 4. East Orange General Hospital
 5. Eastern Connecticut Health Network
 
-Since there is no explicit way to retrieve the actual entity that an employee
-works at (HCM Work Relationship resources appears to be pointing at parent
-companies like Prospect Medical Holdings, Inc. or Prospect Health Access
-Network, Inc.), this task is configured to use the first digit of the
-employee ID when determining which actual hospital to route to.
+When transferring documents for a worker resource in Oracle HCM, the
+corresponding employee must be mapped to a hospital location in DocuSign CLM.
+This mapping is done by the business unit for their primary work assignment.
+The business unit mapping is as follows:
 
-| First digit | Hospital |
+| Business Unit | Hospital |
 |-------------|----------|
-| 3 | Crozer-Keystone Health System |
+| CROZER | Crozer-Keystone Health System |
 |   | CharterCARE Health Partners |
 |   | Waterbury Hospital |
 |   | East Orange General Hospital |
