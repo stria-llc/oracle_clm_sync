@@ -1,6 +1,8 @@
 require 'springcm-sdk'
 require 'oracle_hcm'
 require './delivery_log_db.rb'
+require 'dotenv'
+Dotenv.load
 
 class Task
   VERSION = '0.1.0'.freeze
