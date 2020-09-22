@@ -24,7 +24,6 @@ class Task
   private
 
   def transfer_document_records
-    puts delivery_log_db.delivery_date('1000003')
     records = hcm_client.document_records(limit: 100)
     while records.items.size > 0
       records.items.each { |document_record|
