@@ -44,7 +44,7 @@ class Task
     end
 
     begin
-      target_folder = clm_upload_folder_for(emp_id)
+      target_folder = clm_upload_folder_for(record)
       if target_folder.nil?
         puts "Skipping document record #{id}, no assigned CLM location for employee ID #{emp_id}"
       else
@@ -68,7 +68,7 @@ class Task
     else
       raise "Unhandled content type #{content_type}"
     end
-    group_name = attribute_group_name_for(record.person_number)
+    group_name = attribute_group_name_for(record)
     if group_name.nil?
       raise "Unable to determine target CLM attribute group"
     end
@@ -98,15 +98,23 @@ class Task
     delivery_log_db.log_delivery(record, doc)
   end
 
-  def attribute_group_name_for(emp_id)
-    case emp_id.to_s[0]
-    when '3'
+  def attribute_group_name_for(record)
+    emp = hcm_client.worker(id: record.person_id)
+    rel = emp.work_relationships(q: 'PrimaryFlag=true').items.first
+    asgn = rel.assignments(q: 'PrimaryFlag=true').items.first
+    case asgn.business_unit
+    when 'CROZER'
       'PMH Employee File - Crozer-Keystone Health System'
+    else
+      nil
     end
   end
 
-  def clm_upload_folder_for(emp_id)
-    return clm_upload_paths[emp_id.to_s[0]]
+  def clm_upload_folder_for(record)
+    emp = hcm_client.worker(id: record.person_id)
+    rel = emp.work_relationships(q: 'PrimaryFlag=true').items.first
+    asgn = rel.assignments(q: 'PrimaryFlag=true').items.first
+    return clm_upload_paths[asgn.business_unit]
   end
 
   # Print some info
@@ -138,7 +146,7 @@ AWS Config:
     puts 'SpringCM client connection successful'
     puts 'Loading CLM upload folders'
     @clm_upload_paths = {
-      '3' => client.folder(path: '/PMH/PMH Hospitals/Crozer-Keystone Health System/Human Resources/_Admin/_CaaS Uploads')
+      'CROZER' => client.folder(path: '/PMH/PMH Hospitals/Crozer-Keystone Health System/Human Resources/_Admin/_CaaS Uploads')
     }
     puts 'Done'
     return client
