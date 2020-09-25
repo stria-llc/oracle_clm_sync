@@ -27,14 +27,19 @@ class DeliveryLogDb
 
     puts "Loading delivery log history from #{domain_name}: #{count} items"
 
+    next_token = nil
+
     loop do
-      results = sdb.select({
+      q = {
         consistent_read: true,
+        next_token: next_token,
         select_expression: <<-EXPR
           select delivery_date, clm_document_uid
           from #{domain_name}
         EXPR
-      })
+      }
+
+      results = sdb.select(q)
 
       results.items.each { |item|
         upload_history[item.name] = {
@@ -43,7 +48,9 @@ class DeliveryLogDb
         }
       }
 
-      break if results.next_token.nil?
+      next_token = results.next_token
+
+      break if next_token.nil?
     end
   end
 
