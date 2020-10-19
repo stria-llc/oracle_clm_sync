@@ -65,6 +65,12 @@ class Task
     when 'application/pdf'
       ext = 'pdf'
       type = :pdf
+    when 'image/jpeg'
+      ext = 'jpg'
+      type = :binary
+    when 'image/png'
+      ext = 'png'
+      type = :binary
     else
       raise "Unhandled content type #{content_type}"
     end
