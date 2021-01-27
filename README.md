@@ -1,5 +1,11 @@
 # Oracle HCM CLM Sync
 
+:warning::warning::warning::warning::warning::warning:
+
+# This project has been re-implemented as the Oracle Bridge. https://github.com/strians/oracle_bridge
+
+:warning::warning::warning::warning::warning::warning::
+
 ## Description
 
 This script connects to an Oracle HCM account and downloads any document
